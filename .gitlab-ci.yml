@@ -1,9 +1,10 @@
 stages:
   - deploy
 
-deploy_awx:
+deploy:
   stage: deploy
   image: bitnami/kubectl:latest
   script:
-    - kubectl apply -f k8s/aws-demo.yml
-    - kubectl apply -f k8s/awx-ingress.yml
+    - echo "$KUBECONFIG" > kubeconfig
+    - export KUBECONFIG=$PWD/kubeconfig
+    - kubectl apply -f k8s/
