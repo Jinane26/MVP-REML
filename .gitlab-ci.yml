@@ -1,0 +1,9 @@
+stages:
+  - deploy
+
+deploy_awx:
+  stage: deploy
+  image: bitnami/kubectl:latest
+  script:
+    - kubectl apply -k github.com/ansible/awx-operator/config/default?ref=devel
+    - kubectl apply -f k8s/awx-demo.yml -n awx
